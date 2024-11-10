@@ -14,8 +14,8 @@
 <script>
 import { mapState } from "vuex";
 import ProjectActionsTypes from "../store/modules/projects/projects.types";
-import NewProjectModal from "./NewProjectModal";
-import ProjectsGrid from "./ProjectsGrid";
+import NewProjectModal from "./NewProjectModal.vue";
+import ProjectsGrid from "./ProjectsGrid.vue";
 
 export default {
   name: "ProjectsList",

@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { PlusIcon, PencilIcon } from "@heroicons/vue/solid";
+import { PlusIcon, PencilIcon } from "@heroicons/vue/24/solid";
 
 export default {
   name: "ProjectsGrid",
