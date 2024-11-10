@@ -9,17 +9,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import ProjectsList from "./components/ProjectsList.vue";
 import Toolbar from "./components/Toolbar.vue";
 
-export default {
-  name: "App",
-  components: {
-    Toolbar,
-    ProjectsList,
-  },
-};
 </script>
 
 <style lang="scss">

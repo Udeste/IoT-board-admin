@@ -30,7 +30,7 @@
                 <span
                   class="bg-gray-800 rounded inline-block text-white align-middle cursor-pointer"
                 >
-                  <PlusIcon class="w-5 h-5" @click="$emit('addProject')" />
+                  <PlusIcon class="w-5 h-5" @click="addProject()" />
                 </span>
               </th>
             </tr>
@@ -61,7 +61,7 @@
                     class="bg-gray-800 rounded inline-block text-white align-middle cursor-pointer"
                     ><PencilIcon
                       class="w-5 h-5"
-                      @click="$emit('editProject', project)"
+                      @click="editProject(project)"
                     />
                   </span>
                 </div>
@@ -74,18 +74,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed } from "vue";
 import { PlusIcon, PencilIcon } from "@heroicons/vue/24/solid";
 
-export default {
-  name: "ProjectsGrid",
-  props: ["projects"],
-  components: {
-    PlusIcon,
-    PencilIcon,
-  },
-  emits: ["addProject", "editProject"],
-};
+const props = defineProps(['projects'])
+const projects = computed(() => props.projects)
+
+const emit = defineEmits(["addProject", "editProject"])
+
+const addProject = () => emit('addProject')
+const editProject = () => emit('editProject', project)
 </script>
 
 <style scoped lang="scss">
