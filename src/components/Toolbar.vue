@@ -14,11 +14,7 @@
   </nav>
 </template>
 
-<script>
-export default {
-  name: "Toolbar",
-  mounted() {},
-};
+<script setup>
 </script>
 
 <style scoped lang="scss">

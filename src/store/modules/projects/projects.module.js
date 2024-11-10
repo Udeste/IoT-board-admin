@@ -4,18 +4,19 @@ import ProjectActionsTypes from './projects.types'
 export const projectsModule = {
   namespaced: true,
   state: {
-    projects: []
+    allProjects: []
   },
   getters: {
-    projectIds: (state) => state.projects.map(p => p.id),
-    project: (state) => (id) => state.projects.find(p => p.id === id)
+    all: (state) => state.allProjects, 
+    projectIds: (state) => state.allProjects.map(p => p.id),
+    project: (state) => (id) => state.allProjects.find(p => p.id === id)
   },
   mutations: {
     [ProjectActionsTypes.ADD_PROJECTS](state, projects) {
-      state.projects = [...state.projects, ...projects];
+      state.allProjects = [...state.allProjects, ...projects];
     },
     [ProjectActionsTypes.ADD_PROJECT](state, proj) {
-      state.projects.push(proj);
+      state.allProjects.push(proj);
     }
   },
   actions: {
