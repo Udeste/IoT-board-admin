@@ -17,13 +17,21 @@ export const projectsModule = {
     },
     [ProjectActionsTypes.ADD_PROJECT](state, proj) {
       state.allProjects.push(proj);
+    },
+    [ProjectActionsTypes.DELETE_PROJECT](state, id) {
+      state.allProjects = state.allProjects.filter(p => p.id !== id);
     }
   },
   actions: {
     [ProjectActionsTypes.GET_ALL_PROJECTS]({ commit }) {
       api.getProjects()
         .then(response => commit(ProjectActionsTypes.ADD_PROJECTS, response))
-        .catch(() => commit(ProjectActionsTypes.ADD_PROJECTS, []))
+        .catch((e) => { throw e })
+    },
+    [ProjectActionsTypes.DELETE_PROJECT]({ commit }, { id }) {
+      api.deleteProject(id)
+        .then(() => commit(ProjectActionsTypes.DELETE_PROJECT, id))
+        .catch((e) => { throw e })
     }
   },
   modules: {

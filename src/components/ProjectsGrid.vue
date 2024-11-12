@@ -37,7 +37,7 @@
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <tr v-for="project in projects" :key="project.id">
-              <td class="px-2 py-1 whitespace-nowrap">
+              <td class="px-2 py-1">
                 <div class="text-sm text-left font-medium text-gray-900">
                   {{ project.name }}
                 </div>
@@ -45,12 +45,12 @@
                   {{ project.id }}
                 </div>
               </td>
-              <td class="px-2 py-1 whitespace-nowrap">
+              <td class="px-2 py-1">
                 <div class="text-sm text-left text-gray-900">
                   {{ project.description }}
                 </div>
               </td>
-              <td class="px-2 py-1 whitespace-nowrap">
+              <td class="px-2 py-1">
                 <div class="text-sm text-left text-gray-900">
                   {{ project.sensors }}
                 </div>
@@ -62,6 +62,13 @@
                     ><PencilIcon
                       class="w-5 h-5"
                       @click="editProject(project)"
+                    />
+                  </span>
+                  <span
+                    class="bg-gray-800 rounded inline-block text-white align-middle cursor-pointer"
+                    ><TrashIcon
+                      class="w-5 h-5"
+                      @click="deleteProject(project)"
                     />
                   </span>
                 </div>
@@ -76,7 +83,7 @@
 
 <script setup>
 import { computed } from "vue";
-import { PlusIcon, PencilIcon } from "@heroicons/vue/24/solid";
+import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/vue/24/solid";
 
 const props = defineProps(['projects'])
 const projects = computed(() => props.projects)
@@ -84,7 +91,8 @@ const projects = computed(() => props.projects)
 const emit = defineEmits(["addProject", "editProject"])
 
 const addProject = () => emit('addProject')
-const editProject = () => emit('editProject', project)
+const editProject = (project) => emit('editProject', project)
+const deleteProject = (project) => emit('deleteProject', project)
 </script>
 
 <style scoped lang="scss">

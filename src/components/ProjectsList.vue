@@ -3,6 +3,7 @@
     <ProjectsGrid
       :projects="projects"
       @add-project="addProject"
+      @delete-project="deleteProject"
     />
     <NewProjectModal
       v-if="showAddProjectModal"
@@ -27,6 +28,7 @@ const showAddProjectModal = ref(false)
 onMounted(() => store.dispatch(`projects/${ProjectActionsTypes.GET_ALL_PROJECTS}`))
 
 const addProject = () => showAddProjectModal.value = !showAddProjectModal.value
+const deleteProject = (project) => store.dispatch(`projects/${ProjectActionsTypes.DELETE_PROJECT}`, project)
 </script>
 
 <style scoped lang="scss">
