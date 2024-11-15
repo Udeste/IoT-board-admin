@@ -36,9 +36,9 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="project in projects" :key="project.id" @click="selectProject(project)">
+            <tr v-for="project in projects" :key="project.id">
               <td class="px-2 py-1">
-                <div class="text-sm text-left font-medium text-gray-900">
+                <div class="text-sm text-left font-medium text-gray-900 cursor-pointer" @click="selectProject(project)">
                   {{ project.name }}
                 </div>
                 <div class="text-sm text-left text-gray-500">
