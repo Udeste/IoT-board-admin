@@ -4,13 +4,12 @@
       <Toolbar />
     </div>
     <div>
-      <ProjectsList />
+      <RouterView />
     </div>
   </div>
 </template>
 
 <script setup>
-import ProjectsList from "./components/ProjectsList.vue";
 import Toolbar from "./components/Toolbar.vue";
 
 </script>

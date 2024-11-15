@@ -36,7 +36,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <tr v-for="project in projects" :key="project.id">
+            <tr v-for="project in projects" :key="project.id" @click="selectProject(project)">
               <td class="px-2 py-1">
                 <div class="text-sm text-left font-medium text-gray-900">
                   {{ project.name }}
@@ -88,11 +88,12 @@ import { PlusIcon, PencilIcon, TrashIcon } from "@heroicons/vue/24/solid";
 const props = defineProps(['projects'])
 const projects = computed(() => props.projects)
 
-const emit = defineEmits(["addProject", "editProject"])
+const emit = defineEmits(["addProject", "editProject", "selectProject"])
 
 const addProject = () => emit('addProject')
 const editProject = (project) => emit('editProject', project)
 const deleteProject = (project) => emit('deleteProject', project)
+const selectProject = (project) => emit('selectProject', project)
 </script>
 
 <style scoped lang="scss">

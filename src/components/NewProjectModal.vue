@@ -1,113 +1,54 @@
 <template>
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <div
-    class="fixed z-10 inset-0 overflow-y-auto"
-    aria-labelledby="modal-title"
-    role="dialog"
-    aria-modal="true"
-  >
-    <div
-      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-    >
-      <!--
-      Background overlay, show/hide based on modal state.
+  <Dialog :open="isOpen" @close="close" class="relative z-50">
+    <div class="fixed inset-0 bg-black/30" aria-hidden="true" />
 
-      Entering: "ease-out duration-300"
-        From: "opacity-0"
-        To: "opacity-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100"
-        To: "opacity-0"
-    -->
-      <div
-        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-        aria-hidden="true"
-      ></div>
+    <div class="fixed inset-0 flex w-screen items-center justify-center p-4">
+      <DialogPanel class="w-full max-w-sm rounded bg-white p-3">
+        <DialogTitle>Add project</DialogTitle>
 
-      <!-- This element is to trick the browser into centering the modal contents. -->
-      <span
-        class="hidden sm:inline-block sm:align-middle sm:h-screen"
-        aria-hidden="true"
-        >&#8203;</span
-      >
-
-      <!--
-      Modal panel, show/hide based on modal state.
-
-      Entering: "ease-out duration-300"
-        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        To: "opacity-100 translate-y-0 sm:scale-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100 translate-y-0 sm:scale-100"
-        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-    -->
-      <div
-        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-      >
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
-            <div
-              class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
-            >
-              <!-- Heroicon name: outline/exclamation -->
-              <svg
-                class="h-6 w-6 text-red-600"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-            </div>
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3
-                class="text-lg leading-6 font-medium text-gray-900"
-                id="modal-title"
-              >
-                Deactivate account
-              </h3>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">
-                  Are you sure you want to deactivate your account? All of your
-                  data will be permanently removed. This action cannot be
-                  undone.
-                </p>
-              </div>
-            </div>
+        <div class="grid grid-col-1 gap-2 p-5">
+          <div>
+            <label for="name" class="block text-sm/6 font-medium text-gray-900">Name</label>
+            <input type="text" name="name" id="name"
+              v-model="name"
+              class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" />
+          </div>
+          <div>
+            <label for="description" class="block text-sm/6 font-medium text-gray-900">Description</label>
+            <input type="text" description="description" id="description"
+              v-model="description"
+              class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" />
           </div>
         </div>
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button
-            type="button"
-            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Deactivate
-          </button>
-          <button
-            type="button"
-            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-            @click="close()"
-          >
-            Cancel
-          </button>
+
+        <div class="flex justify-end">
+          <button @click="confirm()"
+            class="bg-blue-500 inline-block justify-center px-3 py-1 rounded-md text-white">Create</button>
+          <button @click="close()"
+            class="bg-gray-500 inline-block justify-center px-3 py-1 rounded-md text-white">Cancel</button>
         </div>
-      </div>
+      </DialogPanel>
     </div>
-  </div>
+  </Dialog>
 </template>
 
 <script setup>
-const emit = defineEmits('close')
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from '@headlessui/vue'
+import { computed, ref } from "vue";
 
+const props = defineProps(['projects'])
+const isOpen = computed(() => props.open)
+
+const name = ref('')
+const description = ref('')
+
+const emit = defineEmits('close')
 const close = () => emit('close')
+const confirm = () => emit('confirm', { name: name.value, description: description.value })
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
